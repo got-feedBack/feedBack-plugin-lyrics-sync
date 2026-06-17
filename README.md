@@ -1,6 +1,8 @@
-# Lyrics Sync
+# Lyrics Sync (deprecated — moved to Lyrics Karaoke)
 
-A [Slopsmith](https://github.com/got-feedback/feedback) plugin that generates time-synced LRC lyrics files using Whisper forced alignment against isolated vocals stems.
+> **This plugin has merged into [Lyrics Karaoke](https://github.com/byrongamatos/slopsmith-plugin-lyrics-karaoke).** The Whisper alignment workflow now lives there alongside per-syllable pitch extraction and the in-player karaoke ribbon, so karaoke setup is a single screen end-to-end. This repo is kept as a redirect stub for users with the old plugin installed — its `screen.js` auto-redirects to the merged plugin's nav entry. New installs should clone `slopsmith-plugin-lyrics-karaoke` instead.
+
+A [Slopsmith](https://github.com/byrongamatos/slopsmith) plugin that generates time-synced LRC lyrics files using Whisper forced alignment against isolated vocals stems.
 
 ## How it works
 
@@ -29,7 +31,7 @@ Because sloppak songs already have an isolated vocals track from Demucs separati
 
 ```bash
 cd plugins
-git clone https://github.com/got-feedback/feedback-plugin-lyrics-sync.git lyrics_sync
+git clone https://github.com/byrongamatos/slopsmith-plugin-lyrics-sync.git lyrics_sync
 ```
 
 Restart Slopsmith and the plugin will appear in the Plugins dropdown.

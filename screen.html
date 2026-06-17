@@ -1,92 +1,18 @@
-<div class="max-w-4xl mx-auto px-6 pt-24 pb-16">
+<div class="max-w-2xl mx-auto px-6 pt-24 pb-16">
     <button onclick="showScreen('home')" class="text-gray-500 hover:text-white text-sm mb-6 flex items-center gap-1">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Back
     </button>
-    <h2 class="text-3xl font-bold text-white mb-2">Lyrics Sync</h2>
-    <p class="text-gray-500 mb-8">Generate time-synced lyrics from plain text using AI forced alignment against the vocals stem.</p>
-
-    <!-- Status -->
-    <div id="ls-status" class="mb-6"></div>
-
-    <!-- Song picker -->
-    <div class="mb-6">
-        <label class="text-sm font-semibold text-gray-300 mb-2 block">1. Select a song with stems</label>
-        <div class="flex gap-3">
-            <input type="text" id="ls-search" placeholder="Search sloppak songs with stems..."
-                onkeydown="if(event.key==='Enter')lsSearchSongs()"
-                class="flex-1 bg-dark-700 border border-gray-800 rounded-xl px-4 py-2.5 text-sm text-gray-300 placeholder-gray-600 focus:border-accent/50 outline-none">
-            <button onclick="lsSearchSongs()" class="bg-dark-600 hover:bg-dark-500 px-5 py-2.5 rounded-xl text-sm text-gray-300 transition">Search</button>
-        </div>
-        <div id="ls-search-results" class="space-y-1 mt-2"></div>
-        <div id="ls-selected-song" class="hidden mt-3 bg-dark-700/50 border border-accent/30 rounded-xl p-3 flex items-center gap-3">
-            <span class="text-accent text-sm font-semibold" id="ls-selected-label"></span>
-            <button onclick="lsClearSong()" class="ml-auto text-gray-500 hover:text-red-400 text-xs transition">Clear</button>
-        </div>
-    </div>
-
-    <!-- Lyrics input -->
-    <div class="mb-6">
-        <label class="text-sm font-semibold text-gray-300 mb-2 block">2. Paste or upload lyrics</label>
-        <textarea id="ls-lyrics" rows="10" placeholder="Paste plain text lyrics here, one line per line..."
-            class="w-full bg-dark-700 border border-gray-800 rounded-xl px-4 py-3 text-sm text-gray-300 placeholder-gray-600 focus:border-accent/50 outline-none resize-y font-mono"></textarea>
-        <div class="flex items-center gap-3 mt-2">
-            <label class="cursor-pointer bg-dark-600 hover:bg-dark-500 px-4 py-2 rounded-lg text-xs text-gray-300 transition">
-                Upload .txt
-                <input type="file" accept=".txt,.lrc" id="ls-file-upload" class="hidden" onchange="lsFileUpload(this)">
-            </label>
-            <span class="text-xs text-gray-600" id="ls-lyrics-count">0 lines</span>
-        </div>
-    </div>
-
-    <!-- Options -->
-    <div class="mb-6 flex flex-wrap items-center gap-5">
-        <label class="text-sm text-gray-400">
-            Language hint:
-            <input type="text" id="ls-language" placeholder="auto" maxlength="5"
-                class="ml-2 w-20 bg-dark-700 border border-gray-800 rounded-lg px-3 py-1.5 text-sm text-gray-300 placeholder-gray-600 focus:border-accent/50 outline-none">
-        </label>
-        <div class="flex items-center gap-3 text-sm text-gray-400">
-            <span>Granularity:</span>
-            <label class="flex items-center gap-1.5 cursor-pointer">
-                <input type="radio" name="ls-granularity" value="line" checked class="accent-accent"> Line
-            </label>
-            <label class="flex items-center gap-1.5 cursor-pointer">
-                <input type="radio" name="ls-granularity" value="word" class="accent-accent"> Word
-            </label>
-            <label class="flex items-center gap-1.5 cursor-pointer">
-                <input type="radio" name="ls-granularity" value="syllable" class="accent-accent"> Syllable
-            </label>
-        </div>
-    </div>
-
-    <!-- Align button -->
-    <button onclick="lsAlign()" id="ls-align-btn"
-        class="bg-accent hover:bg-accent-light px-6 py-2.5 rounded-xl text-sm text-white font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed mb-8"
-        disabled>
-        Align Lyrics
+    <h2 class="text-2xl font-bold text-white mb-2">Lyrics Sync moved</h2>
+    <p class="text-gray-400 mb-6">
+        The lyrics alignment workflow now lives inside the
+        <strong class="text-gray-200">Lyrics Karaoke</strong> plugin, alongside the per-syllable pitch
+        ribbon. Same alignment, same Save-to-Song, plus the karaoke step in one place.
+    </p>
+    <button onclick="showScreen('plugin-lyrics_karaoke')"
+        class="bg-accent hover:bg-accent-light px-5 py-2.5 rounded-xl text-sm text-white font-semibold transition">
+        Open Lyrics Karaoke
     </button>
-
-    <!-- Progress -->
-    <div id="ls-progress" class="hidden mb-6">
-        <div class="bg-dark-700 border border-gray-800 rounded-xl p-5">
-            <p class="text-sm text-gray-300 mb-3">Aligning lyrics with Whisper...</p>
-            <div class="progress-bar"><div class="fill animate-pulse" style="width:100%"></div></div>
-            <p class="text-xs text-gray-500 mt-2">This may take a minute for longer songs.</p>
-        </div>
-    </div>
-
-    <!-- Preview -->
-    <div id="ls-preview" class="hidden mb-8">
-        <h3 class="text-sm font-semibold text-gray-300 mb-3">Preview</h3>
-        <div id="ls-preview-lines" class="bg-dark-800 border border-gray-800 rounded-xl p-4 max-h-96 overflow-y-auto space-y-1 font-mono text-sm"></div>
-        <div class="flex items-center gap-3 mt-4">
-            <button onclick="lsExport()" class="bg-accent hover:bg-accent-light px-5 py-2 rounded-lg text-sm text-white font-semibold transition">
-                Download .lrc
-            </button>
-            <button onclick="lsSave()" id="ls-save-btn" class="bg-dark-600 hover:bg-dark-500 px-5 py-2 rounded-lg text-sm text-gray-300 transition">
-                Save to Song
-            </button>
-        </div>
-        <p id="ls-save-status" class="text-xs text-gray-500 mt-2 hidden"></p>
-    </div>
+    <p class="text-xs text-gray-600 mt-6">
+        You can uninstall this stub any time — the redirect is here only so old bookmarks don't 404.
+    </p>
 </div>

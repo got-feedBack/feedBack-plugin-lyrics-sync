@@ -1,10 +1,9 @@
 {
   "id": "lyrics_sync",
-  "name": "Lyrics Sync",
-  "version": "1.0.0",
+  "name": "Lyrics Sync (moved)",
+  "version": "1.1.0",
   "private": false,
-  "nav": { "label": "Lyrics Sync", "screen": "lyrics-sync" },
+  "nav": { "label": "Lyrics Sync (moved)", "screen": "plugin-lyrics_sync" },
   "screen": "screen.html",
-  "script": "screen.js",
-  "routes": "routes.py"
+  "script": "screen.js"
 }
