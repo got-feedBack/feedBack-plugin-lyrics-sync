@@ -3,8 +3,14 @@
   "name": "Lyrics Sync",
   "version": "1.0.0",
   "private": false,
-  "nav": { "label": "Lyrics Sync", "screen": "lyrics-sync" },
+  "nav": {
+    "label": "Lyrics Sync",
+    "screen": "lyrics-sync"
+  },
   "screen": "screen.html",
   "script": "screen.js",
-  "routes": "routes.py"
+  "routes": "routes.py",
+  "category": "tools",
+  "description": "Author and time-align song lyrics.",
+  "icon": "assets/thumb.svg"
 }
