@@ -21,9 +21,15 @@ Because sloppak songs already have an isolated vocals track from Demucs separati
 
 ## Requirements
 
-- A running [Slopsmith Demucs Server](https://github.com/byrongamatos/slopsmith-demucs-server) with the `/align` endpoint (v2+)
+- A running [Slopsmith Demucs Server](https://github.com/byrongamatos/slopsmith-demucs-server) v2 or later with the `/align` endpoint and `/health` readiness data
 - The demucs server URL must be configured in Slopsmith settings
 - Sloppak songs with split stems (use the Sloppak Converter plugin with Demucs splitting enabled)
+
+The alignment server is considered available only when `/health` returns HTTP 200
+and `warmup.whisperx` is exactly `"ready"`. Demucs Server v2 and later expose
+this `warmup.whisperx` field; the server can return 200 while WhisperX is still
+downloading or loading, so the plugin reports it as unavailable until warmup is
+complete.
 
 ## Install
 
