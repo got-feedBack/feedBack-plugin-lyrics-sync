@@ -6,7 +6,7 @@ A [Slopsmith](https://github.com/got-feedback/feedback) plugin that generates ti
 
 1. Select a sloppak song that has split stems (vocals track required)
 2. Paste or upload plain text lyrics
-3. The plugin sends the vocals stem to your [Slopsmith Demucs Server](https://github.com/byrongamatos/slopsmith-demucs-server) for Whisper forced alignment
+3. The plugin sends the vocals stem to your [feedBack Demucs Server](https://github.com/got-feedBack/feedBack-demucs-server) for Whisper forced alignment
 4. Preview the timestamped result, then download as `.lrc` or save directly into the sloppak for playback display
 
 Because sloppak songs already have an isolated vocals track from Demucs separation, alignment accuracy is significantly better than aligning against a full mix.
@@ -21,7 +21,7 @@ Because sloppak songs already have an isolated vocals track from Demucs separati
 
 ## Requirements
 
-- A running [Slopsmith Demucs Server](https://github.com/byrongamatos/slopsmith-demucs-server) with the `/align` endpoint (v2+)
+- A running [feedBack Demucs Server](https://github.com/got-feedBack/feedBack-demucs-server) with the `/align` endpoint (v2+)
 - The demucs server URL must be configured in Slopsmith settings
 - Sloppak songs with split stems (use the Sloppak Converter plugin with Demucs splitting enabled)
 
